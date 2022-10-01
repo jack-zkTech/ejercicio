@@ -10,7 +10,7 @@ services:
     environment:
     - HOST=soluci0ndb
     - USER=odoo
-    - PASSWORD=soluci-ON
+    - PASSWORD=Temporal10
     volumes:
       - odoo-web-data:/var/lib/odoo
       - ./odoo/config:/etc/odoo
