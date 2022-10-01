@@ -1,14 +1,29 @@
-version: '3.1'
+version: '3'
 services:
   web:
     image: odoo:14.0
     depends_on:
-      - db
+      - soluci0ndb
     ports:
-      - "8069:8069"
-  db:
-    image: postgres:13
+      - "80:8069"
+      - "447:8071"
+    environment:
+    - HOST=soluci0ndb
+    - USER=odoo
+    - PASSWORD=soluci-ON
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./odoo/config:/etc/odoo
+      - ./odoo/addons:/mnt/extra-addons
+  soluci0ndb:
+    image: postgres:latest
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_PASSWORD=soluci-ON
       - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+volumes:
+  odoo-web-data:
+  odoo-db-data:
